@@ -14,8 +14,10 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
-    public void decrease(Long id, Long quantity) {
+    // @Transactional
+    public synchronized void decrease(Long id, Long quantity) {
+        // synchronized 1개의 쓰레드만 접근 가능
+
         Stock stock = stockRepository.findById(id).orElseThrow();
 
         stock.decrease(quantity);
