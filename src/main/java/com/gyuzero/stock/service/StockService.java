@@ -4,6 +4,8 @@ import com.gyuzero.stock.domain.Stock;
 import com.gyuzero.stock.repository.StockRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class StockService {
 
@@ -13,7 +15,9 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    public void decrease(Long id, Long quantity) {
+    // synchronized 해당 메소드는 1개의 thread 만 접근 가능
+//    @Transactional
+    public synchronized void decrease(Long id, Long quantity) {
         // Stock 조회
         // 재고를 감소
         // 갱신된 값을 저장
